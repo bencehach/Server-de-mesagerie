@@ -1,13 +1,14 @@
 import java.util.Calendar;
-import java.util.Scanner;
 
 abstract class MessageObject {
-    protected String message, sender;
+    protected String message;
+    protected Integer senderId;
     protected Calendar calendar = Calendar.getInstance();
 
-    public MessageObject(String sender){
-        this.sender = sender;
+    public MessageObject(String message, Integer senderId){
+        this.message = message;
+        this.senderId = senderId;
     }
 
-    public abstract void writeMessage();
+    public abstract String writeMessage();
 }

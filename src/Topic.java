@@ -1,36 +1,35 @@
+import java.time.LocalDateTime;
 import java.util.Calendar;
-import java.util.Scanner;
 
-public class Topic extends MessageObject{
+public class Topic extends MessageObject {
     private String type;
-    public static final float valability = 30;
+    public static final long VALABILITY = 60;
+    private LocalDateTime creationTime;
 
-    public Topic(String sender, String type){
-        super(sender);
+    public Topic(String message, Integer senderId, String type) {
+        super(message, senderId);
         this.type = type;
+        this.creationTime = LocalDateTime.now();
     }
 
-    public String getTopic(){
+    public String getTopic() {
         return type;
     }
 
-    public boolean isExpired(){
-        int currentSec = calendar.get(Calendar.SECOND);
-        float expirySec = currentSec + valability;
-
-        return currentSec == expirySec;
+    public boolean isExpired() {
+        LocalDateTime expirationTime = this.creationTime.plusSeconds(VALABILITY);
+        return LocalDateTime.now().isAfter(expirationTime);
     }
 
-    public void writeMessage(){
-        Scanner scanner = new Scanner(System.in);
-
-        while(!scanner.next().equals(".")) {
-            this.message = scanner.nextLine();
-            int minute = this.calendar.get(Calendar.MINUTE);
-            int second = this.calendar.get(Calendar.SECOND);
-            System.out.println("Topic " + type +"\n" + sender + ": " + message + " " + minute + second);
-        }
+    public String writeMessage() {
+        int hour = this.calendar.get(Calendar.HOUR);
+        int minute = this.calendar.get(Calendar.MINUTE);
+        int second = this.calendar.get(Calendar.SECOND);
+        return "Topic: " + type + " from user with id: " + senderId + " - " + this.message + " at " + hour + ":" + minute + ":" + second;
     }
 
+    public String toString() {
+        return ("Topic: " + type + " from user with id: " + senderId + " with message: " + message + " created at: " + creationTime + "\r");
+    }
 
 }

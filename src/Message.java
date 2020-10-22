@@ -1,27 +1,26 @@
 import java.util.Calendar;
-import java.util.Scanner;
 
-public class Message extends MessageObject{
-    private String receiver, sender;
+public class Message extends MessageObject {
 
-    Message(String sender) {
-        super(sender);
+    private Integer receiverId;
+
+    Message(String message, Integer senderId) {
+        super(message, senderId);
     }
 
-    public void setReceiver(){
-        Scanner scanner = new Scanner(System.in);
-        this.receiver = scanner.nextLine();
+    public void setReceiver(Integer receiverId) {
+        this.receiverId = receiverId;
     }
 
-    public void writeMessage(){
-        Scanner scanner = new Scanner(System.in);
+    public Integer getReceiverId() {
+        return this.receiverId;
+    }
 
-        while(!scanner.next().equals(".")) {
-            this.message = scanner.nextLine();
-            int minute = this.calendar.get(Calendar.MINUTE);
-            int second = this.calendar.get(Calendar.SECOND);
-            System.out.println(sender + ": " + message + " " + minute + second);
-        }
+    public String writeMessage() {
+        int hour = this.calendar.get(Calendar.HOUR);
+        int minute = this.calendar.get(Calendar.MINUTE);
+        int second = this.calendar.get(Calendar.SECOND);
+        return "New message from client with id: " + senderId + ": " + this.message + " at " + hour + ":" + minute + ":" + second;
     }
 
 }
