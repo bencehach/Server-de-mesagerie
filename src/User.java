@@ -42,11 +42,18 @@ public class User extends Thread {
                 break;
             }
 
-            String[] splitedUserInput = userInput.split(":");
+            String res = "";
+            String lastCharacter = userInput.substring(userInput.length()-1);
+            for (String val: userInput.split("\b")) {
+               res = res.concat(val.substring(0, val.length() - 1));
+            }
+            res = res.concat(lastCharacter);
+
+            String[] splitedUserInput = res.split(":");
 
             if (splitedUserInput.length != 3) {
                 printToUser("You entered a wrong format, please use this format for messages(message:{receiverUserId}:message content)\r\n" +
-                        "or this format for topics(topic:type:message)\r\n or list:all:topics for listing all the topics");
+                        "or this format for topics(topic:type:message)\r\n or topic:list:all for listing all the topics");
                 continue;
             }
             if ("message".equalsIgnoreCase(splitedUserInput[0])) {
