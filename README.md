@@ -2,32 +2,44 @@
 
 Server de mesagerie
 
-Un server care poate fi folosit de aplicatii pentru a comunica intre
-ele prin mesaje. Prin intermediul serverului pot fi efectuate trei
-tipuri de activitati:
-- trimitere de mesaje
-- receptie de mesaje
+<h2> Scopul proiectului </h2>
+Un server care poate fi folosit de aplicatii pentru a comunica intre ele prin mesaje. Prin intermediul serverului pot fi efectuate trei tipuri de activitati:
+- trimiterea mesajelor
+- receptia mesajelor
 - administrare
 
-Mesajele sunt trimise si receptionate prin intermediul a doua tipuri
-de resurse oferite de server:
-- message queues
-- topics
+<h2> Instalare si rulare </h2>
 
-Cozile de mesaje pot tine un numar maxim de mesaje la un moment dat,
-iar accesul lor se face dupa princpiul FIFO. Fiecare mesaj specifica
-intr-un antet destinatarul mesajului. Daca un program nu este
-destinatar al mesajului nu il va prelua. Preluarea unui mesaj implica
-scoaterea lui din coada.
+Dupa extragerea din formatul zip, se deschide proiectul in IDE-ul preferat si se ruleaza clasa Server. Apoi pentru a crea un nou user, se scrie in terminal comanda
 
-Resursele de tip Topic permit publicarea de mesaje care pot fi citite
-de un numar nelimitat de clienti. Nu exista destinatari explicit
-specificati, dar fiecare mesaj are un anumit tip, memorat sub forma
-unui camp in antetul sau. Clientii care citesc mesaje specifica tipul
-mesajului pe care il doresc. La citire, mesajele nu sunt sterse, dar
-ele vor fi sterse automat dupa ce trece un timp de la
-publicarea lor, specificat in antetul mesajului. Serverul poate fi
-configurat cu un timp maxim de valabilitate a mesajelor, masurat de la
-momentul publicarii. Dupa trecerea acestui
-timp, mesajele vor fi sterse indiferent de timpul specificat in
-antetul lor.
+**$ telnet localhost 9991**
+
+Sidenote: asigurati-va ca aveti TelnetClient turned on pe computerul dvs.
+
+<h2> Exemplu utilizare </h2>
+
+Pentru a trimite un mesaj unui alt user, se scrie in terminal comanda:
+
+**$ message:<user_id>:<message_text>** 
+  
+ Pentru a trimite un mesaj pe un anumit subiect (Topic), folosim comanda:
+ 
+ **$ topic:<topic_name>:<message_text>**
+ 
+ Pentru a lista toate topicurile:
+ 
+ **$ topic:list:all**
+ 
+ Pentru a incheia sesiunea unui user, ii inchidem fereastra terminalului.
+ 
+ <h2> Arhitectura sistemului </h2>
+	
+Clasa principala (main) este clasa Server. Aici se apeleaza run() pe 2 clase: Pinger si Server. 
+	
+ 
+ 
+ 
+
+
+
+
